@@ -10,7 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Agent First Organization',
+  title: 'ArkLex: Agent First Organization',
   tagline: 'A New Generation of AI Agents with the capability of',
   favicon: 'img/articulateai.png',
 
@@ -83,9 +83,9 @@ const config = {
       // Replace with your project's social card
       image: 'img/articulateai.png',
       navbar: {
-        title: 'Articulate.AI',
+        title: 'Arklex.AI',
         logo: {
-          alt: 'Articulate.AI Logo',
+          alt: 'Arklex.AI Logo',
           src: 'img/articulateai.png',
         },
         items: [
