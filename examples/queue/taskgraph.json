@@ -1,0 +1,113 @@
+{
+    "nodes": [
+        [
+            "0",
+            {
+                "name": "MessageWorker",
+                "attribute": {
+                    "value": "Welcome to our Queueing System Assistant! How can I assist you today? You can add yourself to the queue, remove yourself, or check who is next in line. Let me know what you need!",
+                    "task": "start message",
+                    "directed": false
+                },
+                "limit": 1,
+                "type": "start"
+            }
+        ],
+        [
+            "1",
+            {
+                "name": "DefaultWorker",
+                "attribute": {
+                    "value": "You have been successfully added to the end of the queue. Please wait for your turn.",
+                    "task": "Assist the user in adding themselves to the end of the queue",
+                    "directed": false
+                },
+                "limit": 1
+            }
+        ],
+        [
+            "2",
+            {
+                "name": "DefaultWorker",
+                "attribute": {
+                    "value": "I will assist you in removing yourself from the queue. Please hold on for a moment.",
+                    "task": "Assist the user in removing themselves from the queue",
+                    "directed": false
+                },
+                "limit": 1
+            }
+        ],
+        [
+            "3",
+            {
+                "name": "DefaultWorker",
+                "attribute": {
+                    "value": "Here is the list of all users currently in the queue: [User1, User2, User3, ...]",
+                    "task": "Provide a list of all users currently in the queue",
+                    "directed": false
+                },
+                "limit": 1
+            }
+        ]
+    ],
+    "edges": [
+        [
+            "0",
+            "1",
+            {
+                "intent": "User wants to add themselves to the queue",
+                "attribute": {
+                    "weight": 1,
+                    "pred": true,
+                    "definition": "",
+                    "sample_utterances": []
+                }
+            }
+        ],
+        [
+            "0",
+            "2",
+            {
+                "intent": "User wants to remove themselves from the queue",
+                "attribute": {
+                    "weight": 1,
+                    "pred": true,
+                    "definition": "",
+                    "sample_utterances": []
+                }
+            }
+        ],
+        [
+            "0",
+            "3",
+            {
+                "intent": "User wants to view the current queue",
+                "attribute": {
+                    "weight": 1,
+                    "pred": true,
+                    "definition": "",
+                    "sample_utterances": []
+                }
+            }
+        ]
+    ],
+    "role": "queueing system",
+    "user_objective": "This queueing assistant helps customers push themselves or pop themselves off the queue. It can also list customers who are on the queue. This is useful to see who is next in reservation for being seated at a table at a restaurant.",
+    "builder_objective": "The queueing assistant ask for user feedback at the end of the conversation.",
+    "domain": "Restaurant",
+    "intro": "The queueing system helps customers add themselves to the end of the queue. They can also pop themselves off the queue. The elements of the queue can also be listed to see all customers on the queue.",
+    "task_docs": [
+        {
+            "source": "https://www.geeksforgeeks.org/basic-operations-for-queue-in-data-structure/",
+            "num": 20
+        }
+    ],
+    "tasks": [],
+    "workers": [
+        "MessageWorker",
+        "QueueWorker",
+        "DefaultWorker"
+    ],
+    "nluapi": "http://localhost:55135/nlu/predict",
+    "slotfillapi": "http://localhost:55135/slotfill/predict"
+}

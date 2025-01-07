@@ -1,0 +1,19 @@
+{
+    "role": "queueing system",
+    "user_objective": "This queueing assistant helps customers push themselves or pop themselves off the queue. It can also list customers who are on the queue. This is useful to see who is next in reservation for being seated at a table at a restaurant.", 
+    "builder_objective": "The queueing assistant ask for user feedback at the end of the conversation.",
+    "domain": "Restaurant",
+    "intro": "The queueing system helps customers add themselves to the end of the queue. They can also pop themselves off the queue. The elements of the queue can also be listed to see all customers on the queue.",
+    "task_docs": [
+        {
+            "source": "https://www.geeksforgeeks.org/basic-operations-for-queue-in-data-structure/",
+            "num": 20
+        }
+    ],
+    "tasks": [],
+    "workers": [
+        "MessageWorker",
+        "QueueWorker",
+        "DefaultWorker"
+    ]
+}

@@ -98,9 +98,13 @@ class AgentOrg:
         user_message = ConvoMessage(history=chat_history_str, message=text)
         orchestrator_message = OrchestratorMessage(message=node_info["attribute"]["value"], attribute=node_info["attribute"])
         sys_instruct = "You are a " + self.product_kwargs["role"] + ". " + self.product_kwargs["user_objective"] + self.product_kwargs["builder_objective"] + self.product_kwargs["intro"]
-        message_state = MessageState(sys_instruct=sys_instruct, user_message=user_message, orchestrator_message=orchestrator_message, message_flow=params.get("worker_response", {}).get("message_flow", ""), slots=params.get("dialog_states"))
+        # Use the queue in params if it exists
+        queue = params['queue'] if 'queue' in params else []
+        message_state = MessageState(sys_instruct=sys_instruct, user_message=user_message, orchestrator_message=orchestrator_message, message_flow=params.get("worker_response", {}).get("message_flow", ""), slots=params.get("dialog_states"), queue=queue)
         worker = WORKER_REGISTRY[node_info["name"]]()
         worker_response = worker.execute(message_state)
+        # Copy back the message state to persist via params.
+        params['queue'] = message_state['queue']
 
         with ls.trace(name=TraceRunName.ExecutionResult, inputs={"message_state": message_state}) as rt:
             rt.end(

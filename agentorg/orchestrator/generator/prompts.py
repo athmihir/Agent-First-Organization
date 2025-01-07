@@ -151,6 +151,20 @@ Answer:
 }}
 ```
 
+Task: The current task is maintaining a queue for restaurant reservations for each customer that is waiting to be seated. The current node level of the task is 1.
+Resources:
+QueueWorker: Push customers onto the queue. It can also remove customers off the queue after they have been seated. Furthermore customers can check all items on the queue to determine how long it will take for them to be seated.
+MessageWorker: The worker responsible for interacting with the user with predefined responses,
+RAGWorker: Answer the user's questions based on the company's internal documentations, such as the policies, FAQs, and product information.
+
+Reasoning: This task involves a single high-level action of adding and removing customers onto the queue. The task can be completed by accessing the queue worker to push, pop and check items on the queue, and providing relevant information. Since it is a singular task that can be handled by the single resource without further decomposition, the answer is No.
+Answer: 
+```json
+{{
+    "answer": "No"
+}}
+```
+
 Task: The current task is {task}. The current node level of the task is {level}.
 Resources: {resources}
 Reasoning:

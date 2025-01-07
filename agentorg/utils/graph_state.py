@@ -54,3 +54,4 @@ class MessageState(TypedDict):
     # task-related params
     status: StatusEnum
     slots: list[Slot]
+    queue: list[str]

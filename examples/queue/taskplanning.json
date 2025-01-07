@@ -1,0 +1,20 @@
+[
+    {
+        "task_name": "Assist the user in adding themselves to the end of the queue",
+        "steps": [
+            "Assist the user in adding themselves to the end of the queue"
+        ]
+    },
+    {
+        "task_name": "Assist the user in removing themselves from the queue",
+        "steps": [
+            "Assist the user in removing themselves from the queue"
+        ]
+    },
+    {
+        "task_name": "Provide a list of all users currently in the queue",
+        "steps": [
+            "Provide a list of all users currently in the queue"
+        ]
+    }
+]

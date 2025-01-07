@@ -140,23 +140,33 @@ class TaskGraph(TaskGraphBase):
         worker_name = self.graph.nodes[sample_node]["name"]
         available_nodes[sample_node]["limit"] -= 1
         if intent and available_nodes[sample_node]["limit"] <= 0 and intent in available_intents:
+            logger.info('Entered inside the intent deleting for loop')
             # delete the corresponding node item from the intent list
             for item in available_intents[intent]:
                 if item["target_node"] == sample_node:
+                    logger.info(f'''Removing the item: {item}''')
                     available_intents[intent].remove(item)
             if not available_intents[intent]:
                 available_intents.pop(intent)
         params["curr_node"] = sample_node
         params["available_nodes"] = available_nodes
         params["available_intents"] = available_intents
+        logger.info(f"backed up available intents to params dict: {available_intents}")
+        logger.info(f"backed up the curr_node: {sample_node}")
+        logger.info(f"backed up the available_nodes : {available_nodes}")
         worker_class = WORKER_REGISTRY.get(worker_name)
         # TODO: This will be used to check whether we skip the worker or not, which is handled by the task graph framework
         skip = self._check_skip(worker_class, sample_node)
+        skip = False
         if skip:
+            logger.info('skip value was true')
             node_info = {"name": None, "attribute": None}
         else:
             node_info = {"name": worker_name, "attribute": self.graph.nodes[sample_node]["attribute"]}
-        
+        # print all nodes in the graph for debugging
+        for node in self.graph.nodes.items():
+            logger.info(node)
+        logger.info(node_info)
         return node_info, params, candidates_intents
 
     def _postprocess_intent(self, pred_intent, available_intents):
